@@ -2,8 +2,16 @@ h1, h3 {
     font-family: 'Montserrat', sans-serif;
     margin: 5px;
 }
+#new_game {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    font-size: .75em;
+    border-radius: 5px;
+    background: greenyellow;
+}
 
-.card:hover {
+.card:hover, button:hover {
 	cursor: pointer;
 }
 
@@ -22,7 +30,13 @@ body {
 .row {
     width: 80%;
     margin: 0 auto;
-    padding: 10px;
+}
+
+.row h3 {
+    display: inline-block;
+    float: right;
+    color: black;
+    margin: 0;
 }
 
 .card {
@@ -33,7 +47,7 @@ body {
     background-size: cover;
     height: 160px;
     width: 20%;
-    margin: 0 10px; 
+    margin: 10px; 
     padding: 5px;
 }
 

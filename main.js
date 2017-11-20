@@ -38,31 +38,25 @@ $(document).ready( function() {
             row.append( 
                 '<div class="card" id="' + pictures[image].name + cardCount[pictures[image].name] +'"> <img src="'+ pictures[image].loc +
                 '"/> </div>');
-            console.log('<div class="card" id="' + pictures[image].name + cardCount[pictures[image].name] +'"> <img src="'+ pictures[image].loc +
-            '"/> </div>');
         };
     };
 
     //function to hide images and reset variables
     function hideImages(selections) {
-        for(i=0; i < selections.length; i++) { // flip the cards back over
-            document.getElementById(selections[i]).childNodes[1].style.visibility = "hidden";
-        };
+        setTimeout(function() { 
+            for(i=0; i < selections.length; i++) { // flip the cards back over with a delay
+                document.getElementById(selections[i]).childNodes[1].style.visibility = "hidden";
+            };
+        }, 500); // set half second delay
     };
 
     //function to compare cards
     function compareCards(compare, selections) {
-        console.log(compare + "FUNCTION");
         if(compare[0] == compare[1]) {
-            if(selections[0] != selections[1]){
-                console.log("its a MATCH!!!");
-            }
-            else {
-                console.log('invalid selection.');
+            if(selections[0] == selections[1]){
                 hideImages(selections);
-            }
+            };
         } else {
-            console.log("try again");
             hideImages(selections);
         };
     };
@@ -77,26 +71,43 @@ $(document).ready( function() {
         addImages(thirdRow);
     };
 
-    // start the game
-    shuffle()
+    // start a new game
+    $('#new_game').on('click', function() {
+        // reset cardCount
+        for(var key in cardCount) {
+            cardCount[key] = 0;
+        };
+        // empty the divs in html
+        $('#firstRow').empty();
+        $('#secondRow').empty();
+        $('#thirdRow').empty();
+        // reset attempt count
+        attempts = 0;
+        document.getElementById("attempts").innerHTML = 0;
+        //shuffle all cards
+        shuffle();
+    });
 
+    // start the game
+    shuffle();
     // array for comparing cards
     var compare =[];
     // array for storing ids of selected image
     var selections =[];
+    // count attempts
+    var attempts = 0;
 
     // get the class name on click
     $(document).on('click', '.card', function() {
         var cardId = $(this).attr('id');
         selections.push(cardId);
-        console.log(selections); // debugging
         // make the image visible (flip the card)
         document.getElementById(cardId).childNodes[1].style.visibility = "visible";
         newId = cardId.replace(/\d/g,'');
-        console.log(newId); // debugging
         compare.push(newId); // push item to compare array
         if(compare.length == 2) { // compare items in array
             compareCards(compare,selections);
+            document.getElementById("attempts").innerHTML = ++attempts;
             compare = [];
             selections= [];
         }; 
