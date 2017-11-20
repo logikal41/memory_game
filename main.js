@@ -43,6 +43,30 @@ $(document).ready( function() {
         };
     };
 
+    //function to hide images and reset variables
+    function hideImages(selections) {
+        for(i=0; i < selections.length; i++) { // flip the cards back over
+            document.getElementById(selections[i]).childNodes[1].style.visibility = "hidden";
+        };
+    };
+
+    //function to compare cards
+    function compareCards(compare, selections) {
+        console.log(compare + "FUNCTION");
+        if(compare[0] == compare[1]) {
+            if(selections[0] != selections[1]){
+                console.log("its a MATCH!!!");
+            }
+            else {
+                console.log('invalid selection.');
+                hideImages(selections);
+            }
+        } else {
+            console.log("try again");
+            hideImages(selections);
+        };
+    };
+
     // shuffle cards
     function shuffle() {
         var firstRow = $('#firstRow');
@@ -66,26 +90,16 @@ $(document).ready( function() {
         var cardId = $(this).attr('id');
         selections.push(cardId);
         console.log(selections); // debugging
+        // make the image visible (flip the card)
+        document.getElementById(cardId).childNodes[1].style.visibility = "visible";
         newId = cardId.replace(/\d/g,'');
         console.log(newId); // debugging
         compare.push(newId); // push item to compare array
         if(compare.length == 2) { // compare items in array
-            console.log(compare);
-            if(compare[0] == compare[1]) {
-                console.log("its a MATCH!!!");
-                for(i=0; i < selections.length; i++) { // hide the images when there is a match
-                    document.getElementById(selections[i]).style.visibility = "hidden";
-                };
-                compare = [];
-                selections= [];
-            } else {
-                console.log("try again");
-                compare = [];
-                selections = [];
-            };
+            compareCards(compare,selections);
+            compare = [];
+            selections= [];
         }; 
     }); 
-
-
  
 });

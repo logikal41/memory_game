@@ -1,19 +1,44 @@
-.row {
-    width: 85%;
-    margin: 0 auto;
+h1, h3 {
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px;
 }
 
+.card:hover {
+	cursor: pointer;
+}
+
+.title { 
+    text-align: center;
+    color: white;
+    text-shadow: -1px 0 black, 0 1.5px black, 1px 0 black, 0 -1.5px black;
+}
+
+body {
+    background-image: url('/pictures/climb.jpg');
+    background-size: cover;
+    padding-left: 300px;
+}
+
+.row {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+}
 
 .card {
     border: 2px black solid;
+    border-radius: 15px;
     display: inline-block;
-    height: 175px;
+    background-image: url("pictures/bd_logo.jpg");
+    background-size: cover;
+    height: 160px;
     width: 20%;
-    margin: 10px;
-    padding: 10px;
+    margin: 0 10px; 
+    padding: 5px;
 }
 
 .card img {
     height: 100%;
     width: 100%;
+    visibility: hidden;
 }
